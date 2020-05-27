@@ -1,31 +1,30 @@
 import pkgutil
 import inspect
-from AbstractAnalysisPlugin import AbstractAnalysisPlugin
+from analysis_plugin_handler.abstract_analysis_plugin import AbstractAnalysisPlugin
+from reporting.analysis_results import FullReport
 
 class AnalysisPluginCollection(object):
 
-    def __init__(self, plugin_package):
+    def __init__(self, plugin_package, run_arguments):
         self.plugin_package = plugin_package
-        self.reload_plugins()
+        self.run_arguments = run_arguments
+        self.load_plugins()
 
 
-    def reload_plugins(self):
-        """Reset the list of all plugins and initiate the walk over the main
-        provided plugin package to load all available plugins
-        """
+    def load_plugins(self):
         self.plugins = []
         self.seen_paths = []
-        print()
         print(f'Searching plugins in {self.plugin_package}')
         self.walk_package(self.plugin_package)
 
     def walk_package(self, package):
-        """Recursively walk the supplied package to retrieve all plugins
+        """Walk the package and get all plugins. 
         """
         imported_package = __import__(package, fromlist=[''])
 
         for _, pluginname, ispkg in pkgutil.iter_modules(imported_package.__path__, imported_package.__name__ + '.'):
             if not ispkg:
+                print("importing pluginname", pluginname)
                 plugin_module = __import__(pluginname, fromlist=[''])
                 clsmembers = inspect.getmembers(plugin_module, inspect.isclass)
                 for (_, c) in clsmembers:
@@ -37,6 +36,9 @@ class AnalysisPluginCollection(object):
     def apply_all_plugins_on(self, argument):
         """Apply all of the plugins on the argument supplied to this function
         """
+        full_report = FullReport(run_arguments=self.run_arguments)
         for plugin in self.plugins:
-            print(f'    Applying {plugin.name}')
-            plugin.doAnalysis(argument)
+            print(f'    Applying {plugin.metadata.name}')
+            report = plugin.doAnalysis(argument)
+            full_report.append_report(report)
+        return full_report

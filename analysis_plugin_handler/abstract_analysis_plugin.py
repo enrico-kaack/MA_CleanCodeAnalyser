@@ -1,7 +1,7 @@
 
 class AbstractAnalysisPlugin(object):
     def __init__(self):
-        self.name = "NOT_IMPLEMENTED"
+        self.metadata = None
     
-    def doAnalysis(self, ast):
+    def do_analysis(self, ast):
         raise NotImplementedError

@@ -7,11 +7,11 @@ class InputArguments:
     INPUT_DIR = "inputDir"
 
     @property
-    def inputDirectory(self):
+    def input_directory(self):
         return self._inputDirectory
     
-    @inputDirectory.setter
-    def inputDirectory(self, value):
+    @input_directory.setter
+    def input_directory(self, value):
         #TODO: check if it is a correct path
         if os.path.isdir(value):
             self._inputDirectory = os.path.abspath(value)
@@ -29,11 +29,11 @@ class InputArguments:
 
         print("INPUT ARGS: ", args)
 
-        self.inputDirectory = args[self.INPUT_DIR][0]
+        self.input_directory = args[self.INPUT_DIR][0]
 
 
 
 if __name__ == "__main__":
     args = InputArguments()
-    my_plugins = AnalysisPluginCollection('analysis_plugins')
+    my_plugins = AnalysisPluginCollection('analysis_plugins', args)
     my_plugins.apply_all_plugins_on("Testvalue")
