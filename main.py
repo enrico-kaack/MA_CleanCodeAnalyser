@@ -1,6 +1,6 @@
 import argparse
 import os
-
+from AnalysisPluginCollection import AnalysisPluginCollection
 
 
 class InputArguments:
@@ -35,3 +35,5 @@ class InputArguments:
 
 if __name__ == "__main__":
     args = InputArguments()
+    my_plugins = AnalysisPluginCollection('analysis_plugins')
+    my_plugins.apply_all_plugins_on("Testvalue")
