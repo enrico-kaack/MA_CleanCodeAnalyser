@@ -5,8 +5,7 @@ from reporting.analysis_results import FullReport
 
 class AnalysisPluginCollection(object):
 
-    def __init__(self, plugin_package, run_arguments):
-        self.plugin_package = plugin_package
+    def __init__(self, run_arguments):
         self.run_arguments = run_arguments
         self.load_plugins()
 
@@ -14,10 +13,10 @@ class AnalysisPluginCollection(object):
     def load_plugins(self):
         self.plugins = []
         self.seen_paths = []
-        print(f'Searching plugins in {self.plugin_package}')
-        self.walk_package(self.plugin_package)
+        print(f'Searching plugins in {self.run_arguments.analysis_plugin_directory}')
+        self._walk_package(self.run_arguments.analysis_plugin_directory)
 
-    def walk_package(self, package):
+    def _walk_package(self, package):
         """Walk the package and get all plugins. 
         """
         imported_package = __import__(package, fromlist=[''])
