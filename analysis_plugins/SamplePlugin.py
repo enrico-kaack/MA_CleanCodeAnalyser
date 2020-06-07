@@ -17,7 +17,7 @@ class SamplePlugin(AbstractAnalysisPlugin):
         report = AnalysisReport(self.metadata)
         
         # Sample problem
-        problem1 = SampleProblem(1, 12)
+        problem1 = SampleProblem("sample_file.py", 12)
         report.append_problem(problem1)
         return report
 

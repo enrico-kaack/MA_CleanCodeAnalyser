@@ -1,11 +1,14 @@
 import argparse
 import os
 from AnalysisPluginCollection import AnalysisPluginCollection
+from OutputPluginCollection import OutputPluginCollection
 
 
 class InputArguments:
     INPUT_DIR = "inputDir"
     ANALYSIS_PLUGIN_DIR = "analysisPluginDir"
+    OUTPUT_PLUGIN_DIR = "outputPluginDir"
+    OUTPUT = "output"
 
     @property
     def input_directory(self):
@@ -31,6 +34,18 @@ class InputArguments:
         else:
             raise FileNotFoundError("Analysis Plugin Directory is not a directory")
 
+    @property
+    def output_plugin_directory(self):
+        return self._output_plugin_directory
+    
+    @output_plugin_directory.setter
+    def output_plugin_directory(self, value):
+        #TODO: check if it is a correct path
+        if os.path.isdir(value):
+            self._output_plugin_directory = value
+        else:
+            raise FileNotFoundError("Output Plugin Directory is not a directory")
+
     def __init__(self):
         self.__parseInputArguments()
     
@@ -40,6 +55,10 @@ class InputArguments:
             help="Directory Path to be scanned for Python Source Files")
         ap.add_argument("--" + self.ANALYSIS_PLUGIN_DIR, metavar="<analysis plugin directory>",
             help="Directory Path to be scanned for Analysis Plugins")
+        ap.add_argument("--" + self.OUTPUT_PLUGIN_DIR, metavar="<output plugin directory>",
+            help="Directory Path to be scanned for Output Plugins")
+        ap.add_argument("--" + self.OUTPUT, metavar="<output format plugin>",
+            help="Ouput Plugin to use")
 
         args = vars(ap.parse_args())
 
@@ -47,10 +66,18 @@ class InputArguments:
 
         self.input_directory = args[self.INPUT_DIR][0]
         self.analysis_plugin_directory = args[self.ANALYSIS_PLUGIN_DIR] if args[self.ANALYSIS_PLUGIN_DIR] is not None else "analysis_plugins"
+        self.output_plugin_directory = args[self.OUTPUT_PLUGIN_DIR] if args[self.OUTPUT_PLUGIN_DIR] is not None else "output_plugins"
+        self.output = args[self.OUTPUT] if args[self.OUTPUT] is not None else "std"
 
 
 
 if __name__ == "__main__":
     args = InputArguments()
-    my_plugins = AnalysisPluginCollection(args)
-    my_plugins.apply_all_plugins_on("Testvalue")
+    analysis_plugins = AnalysisPluginCollection(args)
+    output_plugins = OutputPluginCollection(args)
+    
+    #perform analysis
+    full_report = analysis_plugins.apply_all_plugins_on("Testvalue")
+
+    #output result
+    output_plugins.apply_output_plugin_as_specified_in_arguments(full_report)

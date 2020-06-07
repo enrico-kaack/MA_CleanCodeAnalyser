@@ -1,9 +1,9 @@
 import pkgutil
 import inspect
-from analysis_plugin_handler.abstract_analysis_plugin import AbstractAnalysisPlugin
-from reporting.analysis_results import FullReport, AnalysisReport
+from analysis_plugin_handler.abstract_output_plugin import AbstractOutputPlugin
+from reporting.analysis_results import FullReport
 
-class AnalysisPluginCollection(object):
+class OutputPluginCollection(object):
 
     def __init__(self, run_arguments):
         self.run_arguments = run_arguments
@@ -13,8 +13,8 @@ class AnalysisPluginCollection(object):
     def load_plugins(self):
         self.plugins = []
         self.seen_paths = []
-        print(f'Searching plugins in {self.run_arguments.analysis_plugin_directory}')
-        self._walk_package(self.run_arguments.analysis_plugin_directory)
+        print(f'Searching plugins in {self.run_arguments.output_plugin_directory}')
+        self._walk_package(self.run_arguments.output_plugin_directory)
 
     def _walk_package(self, package):
         """Walk the package and get all plugins. 
@@ -28,16 +28,15 @@ class AnalysisPluginCollection(object):
                 clsmembers = inspect.getmembers(plugin_module, inspect.isclass)
                 for (_, c) in clsmembers:
                     # Only add classes that are a sub class of Plugin, but NOT Plugin itself
-                    if issubclass(c, AbstractAnalysisPlugin) & (c is not AbstractAnalysisPlugin):
+                    if issubclass(c, AbstractOutputPlugin) & (c is not AbstractOutputPlugin):
                         print(f'    Found plugin: {c.__module__}.{c.__name__}')
                         self.plugins.append(c())
 
-    def apply_all_plugins_on(self, argument):
-        """Apply all of the plugins on the argument supplied to this function
+    def apply_output_plugin_as_specified_in_arguments(self, full_report):
+        """apply the plugin corresponding to the value specified as run argument
         """
-        full_report = FullReport(run_arguments=self.run_arguments)
+
         for plugin in self.plugins:
-            print(f'    Applying {plugin.metadata.name}')
-            report = plugin.doAnalysis(argument)
-            full_report.append_report(report)
-        return full_report
+            if plugin.output_format == self.run_arguments.output:
+                print(f'    Applying Output {plugin.metadata.name}')
+                plugin.write_report(full_report)
