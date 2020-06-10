@@ -14,5 +14,11 @@ def parse_ast_from_folder(folder):
     for python_file in list_of_python_files:
         with open(python_file, "r") as opened_python_file:
             python_ast = ast.parse(opened_python_file.read(), str(python_file))
-            list_of_ast.append(python_ast)
+            list_of_ast.append(ExtendedAst(python_file, python_ast))
     return list_of_ast
+
+class ExtendedAst():
+    
+    def __init__(self, file_path, a):
+        self.file_path = file_path
+        self.ast = a

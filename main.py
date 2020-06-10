@@ -78,7 +78,7 @@ if __name__ == "__main__":
 
     #get asts for all files
     asts = parse_ast_from_folder(args.input_directory)
-    
+
     #perform analysis
     full_report = analysis_plugins.apply_all_plugins_on(asts)
 
