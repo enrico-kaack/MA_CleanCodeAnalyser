@@ -28,7 +28,7 @@ class StdOutputPlugin(AbstractOutputPlugin):
             PLUGIN NAME: {plugin_report.plugin_metadata.name} by {plugin_report.plugin_metadata.author}"""
             for problem in plugin_report.problems:
                 output_str += f"""
-                Found {problem.name} in {problem.file_path} line {problem.line_number}
+                Found {problem.name} ({problem.file_path}:{problem.line_number})
                     {problem.description}
                 """
         print(output_str)
