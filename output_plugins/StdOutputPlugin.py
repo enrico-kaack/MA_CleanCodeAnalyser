@@ -19,7 +19,7 @@ class StdOutputPlugin(AbstractOutputPlugin):
         Analysis Report on {full_report.run_arguments.input_directory}.
         Analyse Plugins: {", ".join([p.plugin_metadata.name for p in full_report.reports])}.
         Total time: {full_report.analysis_time}
-        Summary: Found {len([r.problems for r in full_report.reports])} problem(s)
+        Summary: Found {len([r1 for r in full_report.reports for r1 in r.problems])} problem(s)
         ----------------------------------------
         RESULTS:"""
         
