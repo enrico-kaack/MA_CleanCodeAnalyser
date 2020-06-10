@@ -1,5 +1,6 @@
 import pkgutil
 import inspect
+import ast
 from analysis_plugin_handler.abstract_analysis_plugin import AbstractAnalysisPlugin
 from reporting.analysis_results import FullReport, AnalysisReport
 
@@ -36,8 +37,9 @@ class AnalysisPluginCollection(object):
         """Apply all of the plugins on the argument supplied to this function
         """
         full_report = FullReport(run_arguments=self.run_arguments)
+
         for plugin in self.plugins:
             print(f'    Applying {plugin.metadata.name}')
-            report = plugin.doAnalysis(argument)
+            report = plugin.do_analysis(argument)
             full_report.append_report(report)
         return full_report

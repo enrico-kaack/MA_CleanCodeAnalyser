@@ -11,7 +11,7 @@ class SamplePlugin(AbstractAnalysisPlugin):
             author="Enrico Kaack <e.kaack@live.de>"
         )
 
-    def doAnalysis(self, ast):
+    def do_analysis(self, ast):
         print("Doing work", self.metadata.name)
 
         report = AnalysisReport(self.metadata)

@@ -2,7 +2,7 @@ import argparse
 import os
 from AnalysisPluginCollection import AnalysisPluginCollection
 from OutputPluginCollection import OutputPluginCollection
-
+from ast_parser import parse_ast_from_folder
 
 class InputArguments:
     INPUT_DIR = "inputDir"
@@ -75,9 +75,12 @@ if __name__ == "__main__":
     args = InputArguments()
     analysis_plugins = AnalysisPluginCollection(args)
     output_plugins = OutputPluginCollection(args)
+
+    #get asts for all files
+    asts = parse_ast_from_folder(args.input_directory)
     
     #perform analysis
-    full_report = analysis_plugins.apply_all_plugins_on("Testvalue")
+    full_report = analysis_plugins.apply_all_plugins_on(asts)
 
     #output result
     output_plugins.apply_output_plugin_as_specified_in_arguments(full_report)
