@@ -38,5 +38,5 @@ class ConditionMethodCallPlugin(AbstractAnalysisPlugin):
 class ReturnNullProblem(AbstractAnalysisProblem):
     def __init__(self, file_path, line_number):
         self.name = "Returned None"
-        self.description = "Returning None is dangerous, since the caller has to check for None. Otherwise, a runtime exception can occur."
+        self.description = "Returning None is dangerous, since the caller has to check for None. Otherwise, a runtime exception may occur."
         super().__init__(file_path, line_number)
