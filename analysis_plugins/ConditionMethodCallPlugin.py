@@ -24,14 +24,28 @@ class ConditionMethodCallPlugin(AbstractAnalysisPlugin):
 
     def analyse_single_ast(self, a):
         problems = []
+        print(ast.dump(a.ast))
         for node in ast.walk(a.ast):
             #for all if
             if isinstance(node, ast.If):
                 testNode = node.test
-                if not isinstance(testNode, ast.Call):
+
+                if self._check_if_direct_comparison(testNode):
                     problems.append(ExplicitComparisonInConditionProblem(a.file_path, testNode.lineno))
         return problems
 
+    def _check_if_direct_comparison(self, node):
+        if isinstance(node, ast.BoolOp):
+            violated = False
+            for n in node.values:
+                print("nodes", n)
+                if self._check_if_direct_comparison(n):
+                    violated = True
+            return violated
+        if isinstance(node, ast.UnaryOp):
+            return self._check_if_direct_comparison(node.operand)
+        if not  isinstance(node, ast.Call):
+            return True
     
 
 

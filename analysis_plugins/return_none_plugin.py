@@ -4,7 +4,7 @@ from reporting.plugin_meta_data import PluginMetaData
 import ast
 from helper import ast_pretty_print
 
-class ConditionMethodCallPlugin(AbstractAnalysisPlugin):
+class ReturnNonePlugin(AbstractAnalysisPlugin):
     def __init__(self):
         super().__init__()
 
