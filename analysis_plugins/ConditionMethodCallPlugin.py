@@ -24,7 +24,6 @@ class ConditionMethodCallPlugin(AbstractAnalysisPlugin):
 
     def analyse_single_ast(self, a):
         problems = []
-        print(ast.dump(a.ast))
         for node in ast.walk(a.ast):
             #for all if
             if isinstance(node, ast.If):
@@ -38,7 +37,6 @@ class ConditionMethodCallPlugin(AbstractAnalysisPlugin):
         if isinstance(node, ast.BoolOp):
             violated = False
             for n in node.values:
-                print("nodes", n)
                 if self._check_if_direct_comparison(n):
                     violated = True
             return violated

@@ -13,8 +13,12 @@ def parse_ast_from_folder(folder):
     list_of_ast = []
     for python_file in list_of_python_files:
         with open(python_file, "r") as opened_python_file:
-            python_ast = ast.parse(opened_python_file.read(), str(python_file))
-            list_of_ast.append(ExtendedAst(python_file, python_ast))
+            try:
+                python_ast = ast.parse(opened_python_file.read(), str(python_file))
+                list_of_ast.append(ExtendedAst(python_file, python_ast))
+            except SyntaxError:
+                print(f"Syntax error on file:{str(python_file)}. Ignoring file")
+
     return list_of_ast
 
 class ExtendedAst():

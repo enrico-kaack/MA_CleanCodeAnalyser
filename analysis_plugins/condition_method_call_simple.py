@@ -24,7 +24,6 @@ class ConditionMethodCallPluginSimple(AbstractAnalysisPlugin):
 
     def analyse_single_ast(self, a):
         problems = []
-        print(ast.dump(a.ast))
         for node in ast.walk(a.ast):
             #for all if
             if isinstance(node, ast.If):
@@ -37,6 +36,6 @@ class ConditionMethodCallPluginSimple(AbstractAnalysisPlugin):
 
 class ExplicitComparisonInConditionProblem(AbstractAnalysisProblem):
     def __init__(self, file_path, line_number):
-        self.name = "Explicit comparison in condition"
+        self.name = "Explicit comparison in condition simple"
         self.description = "Explicit comparisons in conditions should be replaced by method call for better readability"
         super().__init__(file_path, line_number)
