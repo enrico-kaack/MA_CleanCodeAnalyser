@@ -1,5 +1,5 @@
 from plugin_definition.abstract_output_plugin import AbstractOutputPlugin
-from reporting.plugin_meta_data import PluginMetaData
+from plugin_definition.plugin_meta_data import PluginMetaData
 from reporting.analysis_results import FullReport, AnalysisReport
 
 from functools import reduce
