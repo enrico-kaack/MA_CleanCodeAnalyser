@@ -1,4 +1,4 @@
-from analysis_plugin_handler.abstract_analysis_plugin import AbstractAnalysisPlugin
+from plugin_definition.abstract_analysis_plugin import AbstractAnalysisPlugin
 from reporting.analysis_results import AbstractAnalysisProblem, AnalysisReport
 from reporting.plugin_meta_data import PluginMetaData
 import ast

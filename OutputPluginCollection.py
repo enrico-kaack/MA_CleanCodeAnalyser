@@ -1,6 +1,6 @@
 import pkgutil
 import inspect
-from analysis_plugin_handler.abstract_output_plugin import AbstractOutputPlugin
+from plugin_definition.abstract_output_plugin import AbstractOutputPlugin
 from reporting.analysis_results import FullReport
 
 class OutputPluginCollection(object):

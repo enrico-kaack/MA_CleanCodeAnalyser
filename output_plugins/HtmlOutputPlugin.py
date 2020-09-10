@@ -1,4 +1,4 @@
-from analysis_plugin_handler.abstract_output_plugin import AbstractOutputPlugin
+from plugin_definition.abstract_output_plugin import AbstractOutputPlugin
 from reporting.plugin_meta_data import PluginMetaData
 from reporting.analysis_results import FullReport, AnalysisReport
 

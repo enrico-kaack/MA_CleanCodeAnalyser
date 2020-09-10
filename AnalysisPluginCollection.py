@@ -1,7 +1,7 @@
 import pkgutil
 import inspect
 import ast
-from analysis_plugin_handler.abstract_analysis_plugin import AbstractAnalysisPlugin
+from plugin_definition.abstract_analysis_plugin import AbstractAnalysisPlugin
 from reporting.analysis_results import FullReport, AnalysisReport
 
 class AnalysisPluginCollection(object):
