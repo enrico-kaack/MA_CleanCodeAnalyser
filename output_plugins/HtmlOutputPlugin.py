@@ -14,7 +14,7 @@ class StdOutputPlugin(AbstractOutputPlugin):
             author="Enrico Kaack <e.kaack@live.de>"
         )
 
-    def write_report(self, full_report : FullReport):
+    def handle_report(self, full_report : FullReport):
         output_str = f"""
         <html>
         <head>

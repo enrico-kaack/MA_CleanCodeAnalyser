@@ -4,5 +4,5 @@ class AbstractOutputPlugin(object):
         self.metadata = None
         self.output_format = None
     
-    def write_report(self, full_report):
+    def handle_report(self, full_report):
         raise NotImplementedError

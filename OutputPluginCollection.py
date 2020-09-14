@@ -39,4 +39,4 @@ class OutputPluginCollection(object):
         for plugin in self.plugins:
             if plugin.output_format == self.run_arguments.output:
                 print(f'    Applying Output {plugin.metadata.name}')
-                plugin.write_report(full_report)
+                plugin.handle_report(full_report)

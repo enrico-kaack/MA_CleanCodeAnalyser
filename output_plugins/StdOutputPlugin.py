@@ -14,7 +14,7 @@ class StdOutputPlugin(AbstractOutputPlugin):
             author="Enrico Kaack <e.kaack@live.de>"
         )
 
-    def write_report(self, full_report : FullReport):
+    def handle_report(self, full_report : FullReport):
         output_str = f"""
         Analysis Report on {full_report.run_arguments.input_directory}.
         Analyse Plugins: {", ".join([p.plugin_metadata.name for p in full_report.reports])}.

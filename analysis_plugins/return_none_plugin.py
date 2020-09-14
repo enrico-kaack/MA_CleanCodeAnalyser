@@ -17,12 +17,12 @@ class ReturnNonePlugin(AbstractAnalysisPlugin):
         report = AnalysisReport(self.metadata)
         
         for a in asts:
-            problem_in_ast = self.analyse_single_ast(a)
+            problem_in_ast = self._analyse_single_ast(a)
             report.problems.extend(problem_in_ast)
 
         return report
 
-    def analyse_single_ast(self, a):
+    def _analyse_single_ast(self, a):
         problems = []
         for node in ast.walk(a.ast):
             if isinstance(node, ast.Return):
