@@ -27,7 +27,7 @@ class ReturnNonePlugin(AbstractAnalysisPlugin):
         for node in ast.walk(a.ast):
             if isinstance(node, ast.Return):
                 return_value = node.value
-                if isinstance(return_value, ast.Constant):
+                if isinstance(return_value, ast.Constant) or isinstance(return_value, ast.NameConstant):
                     if return_value.value == None:
                         problems.append(ReturnNullProblem(a.file_path, return_value.lineno))
         return problems
