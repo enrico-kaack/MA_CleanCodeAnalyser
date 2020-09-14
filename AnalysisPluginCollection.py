@@ -4,12 +4,12 @@ import ast
 from plugin_definition.abstract_analysis_plugin import AbstractAnalysisPlugin
 from reporting.analysis_results import FullReport, AnalysisReport
 
+
 class AnalysisPluginCollection(object):
 
     def __init__(self, run_arguments):
         self.run_arguments = run_arguments
         self.load_plugins()
-
 
     def load_plugins(self):
         self.plugins = []
@@ -18,8 +18,8 @@ class AnalysisPluginCollection(object):
         self._walk_package(self.run_arguments.analysis_plugin_directory)
 
     def _walk_package(self, package):
-        """Walk the package and get all plugins. 
-        """
+    """Walk the package and get all plugins. 
+    """
         imported_package = __import__(package, fromlist=[''])
 
         for _, pluginname, ispkg in pkgutil.iter_modules(imported_package.__path__, imported_package.__name__ + '.'):

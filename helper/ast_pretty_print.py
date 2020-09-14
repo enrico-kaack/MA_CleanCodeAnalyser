@@ -9,10 +9,9 @@ From http://alexleone.blogspot.co.uk/2010/01/python-ast-pretty-printer.html
 """
 Made available by greentreesnakes documentation at https://bitbucket.org/takluyver/greentreesnakes/src/master/astpp.py
 """
-
-
 import sys
 from ast import *
+
 
 def dump(node, annotate_fields=True, include_attributes=False, indent='  '):
     """
@@ -51,6 +50,7 @@ def dump(node, annotate_fields=True, include_attributes=False, indent='  '):
         raise TypeError('expected AST, got %r' % node.__class__.__name__)
     return _format(node)
 
+
 def parseprint(code, filename="<string>", mode="exec", type_comments=False,
                **kwargs):
     """Parse some code from a string and pretty-print it."""
@@ -62,6 +62,7 @@ def parseprint(code, filename="<string>", mode="exec", type_comments=False,
 
 # Short name: pdp = parse, dump, print
 pdp = parseprint
+
 
 def load_ipython_extension(ip):
     from IPython.core.magic import Magics, magics_class, cell_magic
@@ -89,7 +90,8 @@ def load_ipython_extension(ip):
     ip.register_magics(AstMagics)
 
 if __name__ == '__main__':
-    import sys, tokenize
+    import sys
+    import tokenize
     for filename in sys.argv[1:]:
         print('=' * 50)
         print('AST tree for', filename)

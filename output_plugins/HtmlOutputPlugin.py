@@ -4,6 +4,7 @@ from reporting.analysis_results import FullReport, AnalysisReport
 
 from functools import reduce
 
+
 class StdOutputPlugin(AbstractOutputPlugin):
     def __init__(self):
         super().__init__()
@@ -14,7 +15,7 @@ class StdOutputPlugin(AbstractOutputPlugin):
             author="Enrico Kaack <e.kaack@live.de>"
         )
 
-    def handle_report(self, full_report : FullReport):
+    def handle_report(self, full_report: FullReport):
         output_str = f"""
         <html>
         <head>
@@ -28,17 +29,14 @@ class StdOutputPlugin(AbstractOutputPlugin):
         <div>Total Time:  {full_report.analysis_time}s </div>
         <div>{len([r1 for r in full_report.reports for r1 in r.problems])} problem(s) found </div>
         <h2>RESULTS</h2>"""
-        
+
         for plugin_report in full_report.reports:
 
             for problem in plugin_report.problems:
                 output_str += f"""
                 <h3 title="{problem.description} from {plugin_report.plugin_metadata.name}">{problem.name} </h3>
                 <span> in {problem.file_path}:{problem.line_number}</span>
-                   
                 """
         output_str += "</body></html>"
         with open("report.html", "x") as output_file:
             output_file.write(output_str) 
-
-

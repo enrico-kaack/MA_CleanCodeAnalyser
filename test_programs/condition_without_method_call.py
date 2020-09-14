@@ -2,38 +2,39 @@
 def isSmaller(a, b):
     return a < b
 
+
 def my_func():
     a = 1
     b = 2
 
     while (a < b):
         print("running")
-     
+
     if a < b:
         print("smaller")
-    
+
     if isSmaller(a, b):
         print("smaller")
 
-    if isSmaller(a,b) and a < b:
+    if isSmaller(a, b) and a < b:
         print("smaller")
 
-    if  a < b and isSmaller(a,b) :
+    if a < b and isSmaller(a, b) :
         print("smaller")
 
     if isSmaller(a,b) and isSmaller(b, a):
         print("smaller")
 
-    if not a<b and isSmaller(a,b):
+    if not a < b and isSmaller(a, b):
         print("smaller")
 
-    if not isSmaller(a,b) and a<b:
+    if not isSmaller(a,b) and a < b:
         print("smaller")
 
-    if not isSmaller(a,b):
+    if not isSmaller(a, b):
         print("smaller")
 
-    if not isSmaller(a,b) and isSmaller(b,a):
+    if not isSmaller(a, b) and isSmaller(b, a):
         print("smaller")
 
 if __name__ == "__main__":

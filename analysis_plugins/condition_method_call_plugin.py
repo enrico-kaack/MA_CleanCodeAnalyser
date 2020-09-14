@@ -4,6 +4,7 @@ from plugin_definition.plugin_meta_data import PluginMetaData
 import ast
 from helper import ast_pretty_print
 
+
 class ConditionMethodCallPlugin(AbstractAnalysisPlugin):
     def __init__(self):
         super().__init__()
@@ -15,7 +16,7 @@ class ConditionMethodCallPlugin(AbstractAnalysisPlugin):
 
     def do_analysis(self, source_files):
         report = AnalysisReport(self.metadata)
-        
+
         for source_file in source_files:
             problem_in_ast = self.analyse_single_ast(source_file)
             report.problems.extend(problem_in_ast)
@@ -26,7 +27,7 @@ class ConditionMethodCallPlugin(AbstractAnalysisPlugin):
 
         problems = []
         for node in ast.walk(a.ast):
-            #for all if
+            # for all if
             if isinstance(node, ast.If):
                 testNode = node.test
 
@@ -43,9 +44,8 @@ class ConditionMethodCallPlugin(AbstractAnalysisPlugin):
             return violated
         if isinstance(node, ast.UnaryOp):
             return self._check_if_direct_comparison(node.operand)
-        if not  isinstance(node, ast.Call):
+        if not isinstance(node, ast.Call):
             return True
-    
 
 
 class ExplicitComparisonInConditionProblem(AbstractAnalysisProblem):

@@ -1,10 +1,11 @@
 from typing import List
 
+
 class AbstractAnalysisProblem(object):
 
     def __init__(self):
         self.name = "ABSTRACT PROBLEM"
-        self.description ="ABSTRACT DESCRIPTION"
+        self.description = "ABSTRACT DESCRIPTION"
         self.file_path = "ABSTRACT FILEPATH"
         self.line_number = None
 
@@ -29,6 +30,7 @@ class AnalysisReport(object):
 
     def append_problem(self, problem):
         self.problems.append(problem)
+
 
 class FullReport(object):
     def __init__(self, run_arguments):

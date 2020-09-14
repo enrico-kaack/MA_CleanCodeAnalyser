@@ -4,6 +4,7 @@ from plugin_definition.plugin_meta_data import PluginMetaData
 import ast
 from helper import ast_pretty_print
 
+
 class ReturnNonePlugin(AbstractAnalysisPlugin):
     def __init__(self):
         super().__init__()
@@ -15,7 +16,7 @@ class ReturnNonePlugin(AbstractAnalysisPlugin):
 
     def do_analysis(self, asts):
         report = AnalysisReport(self.metadata)
-        
+
         for a in asts:
             problem_in_ast = self._analyse_single_ast(a)
             report.problems.extend(problem_in_ast)
@@ -28,11 +29,11 @@ class ReturnNonePlugin(AbstractAnalysisPlugin):
             if isinstance(node, ast.Return):
                 return_value = node.value
                 if isinstance(return_value, ast.Constant) or isinstance(return_value, ast.NameConstant):
-                    if return_value.value == None:
+                    if return_value.value is None:
                         problems.append(ReturnNullProblem(a.file_path, return_value.lineno))
         return problems
 
-    
+
 
 
 class ReturnNullProblem(AbstractAnalysisProblem):

@@ -4,6 +4,7 @@ from AnalysisPluginCollection import AnalysisPluginCollection
 from OutputPluginCollection import OutputPluginCollection
 from ast_parser import parse_ast_from_folder
 
+
 class InputArguments:
     INPUT_DIR = "inputDir"
     ANALYSIS_PLUGIN_DIR = "analysisPluginDir"
@@ -13,10 +14,10 @@ class InputArguments:
     @property
     def input_directory(self):
         return self._inputDirectory
-    
+
     @input_directory.setter
     def input_directory(self, value):
-        #TODO: check if it is a correct path
+        # TODO: check if it is a correct path
         if os.path.isdir(value):
             self._inputDirectory = os.path.abspath(value)
         else:
@@ -25,10 +26,10 @@ class InputArguments:
     @property
     def analysis_plugin_directory(self):
         return self._analysis_plugin_directory
-    
+
     @analysis_plugin_directory.setter
     def analysis_plugin_directory(self, value):
-        #TODO: check if it is a correct path
+        # TODO: check if it is a correct path
         if os.path.isdir(value):
             self._analysis_plugin_directory = value
         else:
@@ -37,7 +38,7 @@ class InputArguments:
     @property
     def output_plugin_directory(self):
         return self._output_plugin_directory
-    
+
     @output_plugin_directory.setter
     def output_plugin_directory(self, value):
         #TODO: check if it is a correct path
@@ -51,7 +52,7 @@ class InputArguments:
     
     def __parseInputArguments(self):
         ap = argparse.ArgumentParser()
-        ap.add_argument(self.INPUT_DIR, metavar="<input directory>", type=str, nargs=1, 
+        ap.add_argument(self.INPUT_DIR, metavar="<input directory>", type=str, nargs=1,
             help="Directory Path to be scanned for Python Source Files")
         ap.add_argument("--" + self.ANALYSIS_PLUGIN_DIR, metavar="<analysis plugin directory>",
             help="Directory Path to be scanned for Analysis Plugins")
@@ -70,17 +71,16 @@ class InputArguments:
         self.output = args[self.OUTPUT] if args[self.OUTPUT] is not None else "std"
 
 
-
 if __name__ == "__main__":
     args = InputArguments()
     analysis_plugins = AnalysisPluginCollection(args)
     output_plugins = OutputPluginCollection(args)
 
-    #get asts for all files
+    # get asts for all files
     asts = parse_ast_from_folder(args.input_directory)
 
-    #perform analysis
+    # perform analysis
     full_report = analysis_plugins.apply_all_plugins_on(asts)
 
-    #output result
+    # output result
     output_plugins.apply_output_plugin_as_specified_in_arguments(full_report)

@@ -4,6 +4,7 @@ from plugin_definition.plugin_meta_data import PluginMetaData
 import ast
 from helper import ast_pretty_print
 
+
 class ConditionMethodCallPluginSimple(AbstractAnalysisPlugin):
     def __init__(self):
         super().__init__()
@@ -15,7 +16,7 @@ class ConditionMethodCallPluginSimple(AbstractAnalysisPlugin):
 
     def do_analysis(self, asts):
         report = AnalysisReport(self.metadata)
-        
+
         for a in asts:
             problem_in_ast = self.analyse_single_ast(a)
             report.problems.extend(problem_in_ast)
@@ -25,7 +26,7 @@ class ConditionMethodCallPluginSimple(AbstractAnalysisPlugin):
     def analyse_single_ast(self, a):
         problems = []
         for node in ast.walk(a.ast):
-            #for all if
+            # for all if
             if isinstance(node, ast.If):
                 testNode = node.test
 
