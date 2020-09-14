@@ -15,14 +15,15 @@ def parse_ast_from_folder(folder):
         with open(python_file, "r") as opened_python_file:
             try:
                 python_ast = ast.parse(opened_python_file.read(), str(python_file))
-                list_of_ast.append(ExtendedAst(python_file, python_ast))
+                list_of_ast.append(ParsedSourceFile(python_file, python_ast, opened_python_file.read()))
             except SyntaxError:
                 print(f"Syntax error on file:{str(python_file)}. Ignoring file")
 
     return list_of_ast
 
-class ExtendedAst():
+class ParsedSourceFile():
     
-    def __init__(self, file_path, a):
+    def __init__(self, file_path, a, content):
         self.file_path = file_path
         self.ast = a
+        self.content = content

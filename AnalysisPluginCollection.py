@@ -33,13 +33,13 @@ class AnalysisPluginCollection(object):
                         print(f'    Found plugin: {c.__module__}.{c.__name__}')
                         self.plugins.append(c())
 
-    def apply_all_plugins_on(self, argument):
+    def apply_all_plugins_on(self, source_files):
         """Apply all of the plugins on the argument supplied to this function
         """
         full_report = FullReport(run_arguments=self.run_arguments)
 
         for plugin in self.plugins:
             print(f'    Applying {plugin.metadata.name}')
-            report = plugin.do_analysis(argument)
+            report = plugin.do_analysis(source_files)
             full_report.append_report(report)
         return full_report
