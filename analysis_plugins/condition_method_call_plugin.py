@@ -18,12 +18,12 @@ class ConditionMethodCallPlugin(AbstractAnalysisPlugin):
         report = AnalysisReport(self.metadata)
 
         for source_file in source_files:
-            problem_in_ast = self.analyse_single_ast(source_file)
+            problem_in_ast = self._analyse_single_ast(source_file)
             report.problems.extend(problem_in_ast)
 
         return report
 
-    def analyse_single_ast(self, a):
+    def _analyse_single_ast(self, a):
 
         problems = []
         for node in ast.walk(a.ast):
@@ -38,14 +38,15 @@ class ConditionMethodCallPlugin(AbstractAnalysisPlugin):
     def _check_if_direct_comparison(self, node):
         if isinstance(node, ast.BoolOp):
             violated = False
-            for n in node.values:
-                if self._check_if_direct_comparison(n):
+            #check all expressions of the boolean operator
+            for value in node.values:
+                if self._check_if_direct_comparison(value):
                     violated = True
             return violated
-        if isinstance(node, ast.UnaryOp):
+        elif isinstance(node, ast.UnaryOp):
             return self._check_if_direct_comparison(node.operand)
-        if not isinstance(node, ast.Call):
-            return True
+
+        return not isinstance(node, ast.Call)
 
 
 class ExplicitComparisonInConditionProblem(AbstractAnalysisProblem):

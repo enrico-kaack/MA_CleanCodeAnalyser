@@ -12,7 +12,7 @@ class SamplePlugin(AbstractAnalysisPlugin):
             author="Enrico Kaack <e.kaack@live.de>"
         )
 
-    def do_analysis(self, asts):
+    def do_analysis(self, source_files):
         print("Doing work", self.metadata.name)
 
         report = AnalysisReport(self.metadata)

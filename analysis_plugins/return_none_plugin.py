@@ -14,11 +14,11 @@ class ReturnNonePlugin(AbstractAnalysisPlugin):
             author="Enrico Kaack <e.kaack@live.de>"
         )
 
-    def do_analysis(self, asts):
+    def do_analysis(self, source_files):
         report = AnalysisReport(self.metadata)
 
-        for a in asts:
-            problem_in_ast = self._analyse_single_ast(a)
+        for source_file in source_files:
+            problem_in_ast = self._analyse_single_ast(source_file)
             report.problems.extend(problem_in_ast)
 
         return report
