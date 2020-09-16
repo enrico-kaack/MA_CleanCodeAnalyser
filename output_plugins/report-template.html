@@ -1,0 +1,58 @@
+<html>
+
+<head>
+    <title>Analysis Report</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="card">
+        <h3>Analysis Report on {{ location }}</h3>
+
+        <div class="card">
+            <div class=card-body>
+                <h5 class="card-title">Loaded Analyse Plugins</h5>
+                <p class="card-text">{{ plugins }} </p>
+            </div>
+        </div>
+        <div class="card">
+            <div class=card-body>
+                <h5 class="card-title">Summary</h5>
+                <p class="card-text">
+                <div>Total Time: {{total_time}} </div>
+                <div>{{no_problems_found}} problem(s) found </div>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">RESULTS</h2>
+            {% for plugin_report in reports %}
+            <div class="card">
+                <div class="card-body">
+
+                    <h3 class="card-title">{{plugin_report.plugin_metadata.name}}<small class="text-muted"> by
+                            {{plugin_report.plugin_metadata.author}}</small></h3>
+                    <ul class="list-group">
+                        {% for problem in plugin_report.problems  %}
+                        <li class="list-group-item" title="{{problem.description}} from {{plugin_report.plugin_metadata.name}}">
+                            <h4>
+                                {{problem.name}}
+                            </h4>
+                            <div class="text-muted">{{problem.description}}</div>
+                            <span> in {{problem.file_path}}:{{problem.line_number}}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+</body>
+
+</html>
