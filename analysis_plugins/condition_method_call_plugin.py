@@ -52,5 +52,5 @@ class ConditionMethodCallPlugin(AbstractAnalysisPlugin):
 class ExplicitComparisonInConditionProblem(AbstractAnalysisProblem):
     def __init__(self, file_path, line_number):
         self.name = "Explicit comparison in condition"
-        self.description = "Explicit comparisons in conditions should be replaced by method call for better readability"
+        self.description = "Explicit comparisons in condition statements should be replaced by method call for better readability."
         super().__init__(file_path, line_number)
