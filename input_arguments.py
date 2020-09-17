@@ -1,11 +1,13 @@
 import argparse
 import os
+import logging
 
 class Arguments:
     INPUT_DIR = "inputDir"
     ANALYSIS_PLUGIN_DIR = "analysisPluginDir"
     OUTPUT_PLUGIN_DIR = "outputPluginDir"
     OUTPUT = "output"
+    VERBOSE = "v"
 
     @property
     def input_directory(self):
@@ -56,12 +58,20 @@ class Arguments:
             help="Directory Path to be scanned for Output Plugins")
         ap.add_argument("--" + self.OUTPUT, metavar="<output format plugin>",
             help="Ouput Plugin to use")
+        ap.add_argument("-" + self.VERBOSE, action='store_true',
+            help="Enable verbose printing")
 
         args = vars(ap.parse_args())
 
-        print("INPUT ARGS: ", args)
+
 
         self.input_directory = args[self.INPUT_DIR][0]
         self.analysis_plugin_directory = args[self.ANALYSIS_PLUGIN_DIR] if args[self.ANALYSIS_PLUGIN_DIR] is not None else "analysis_plugins"
         self.output_plugin_directory = args[self.OUTPUT_PLUGIN_DIR] if args[self.OUTPUT_PLUGIN_DIR] is not None else "output_plugins"
         self.output = args[self.OUTPUT] if args[self.OUTPUT] is not None else "std"
+        self.verbose = args[self.VERBOSE] if args[self.VERBOSE] else False
+
+        log_level = logging.DEBUG if self.verbose else logging.ERROR
+        logging.basicConfig(level=log_level)
+        logging.debug("INPUT ARGS: ", args)
+

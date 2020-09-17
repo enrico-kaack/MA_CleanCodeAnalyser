@@ -1,5 +1,7 @@
 from plugin_definition.abstract_output_plugin import AbstractOutputPlugin
 from plugin_loader import load_plugins
+import logging
+
 
 class OutputPluginCollection(object):
 
@@ -19,5 +21,5 @@ class OutputPluginCollection(object):
     def apply_output_plugin_as_specified_in_arguments(self, full_report):
         """apply the plugin corresponding to the value specified as run argument
         """
-        print(f'    Applying Output {self.output_plugin.metadata.name}')
+        logging.debug(f'    Applying Output {self.output_plugin.metadata.name}')
         self.output_plugin.handle_report(full_report)

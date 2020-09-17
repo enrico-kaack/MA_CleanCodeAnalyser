@@ -2,7 +2,7 @@ from plugin_definition.abstract_analysis_plugin import AbstractAnalysisPlugin
 from reporting.analysis_results import FullReport
 from plugin_loader import load_plugins
 import time
-
+import logging
 
 class AnalysisPluginCollection(object):
 
@@ -19,7 +19,7 @@ class AnalysisPluginCollection(object):
         full_report = FullReport(run_arguments=self.run_arguments)
         start = time.perf_counter()
         for plugin in self.plugins:
-            print(f'    Applying {plugin.metadata.name}')
+            logging.debug(f'    Applying {plugin.metadata.name}')
             report = plugin.do_analysis(source_files)
             full_report.append_report(report)
         end = time.perf_counter()
