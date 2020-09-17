@@ -1,10 +1,10 @@
 from plugin_definition.abstract_output_plugin import AbstractOutputPlugin
 from plugin_loader import load_plugins
 import logging
-
+from typing import Optional
 
 class OutputPluginCollection(object):
-
+    output_plugin: Optional[AbstractOutputPlugin] = None
 
     def __init__(self, run_arguments):
         self.run_arguments = run_arguments

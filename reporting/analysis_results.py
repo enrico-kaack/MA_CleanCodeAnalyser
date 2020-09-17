@@ -1,4 +1,8 @@
-class AbstractAnalysisProblem(object):
+from abc import ABC, abstractmethod
+from typing import List, Optional
+from plugin_definition.plugin_meta_data import PluginMetaData
+
+class AbstractAnalysisProblem(ABC):
 
     def __init__(self):
         self.name = "ABSTRACT PROBLEM"
@@ -11,11 +15,11 @@ class AbstractAnalysisProblem(object):
         self.line_number = line_number
 
 
-class AnalysisReport(object):
+class AnalysisReport:
 
-    def __init__(self, plugin_metadata):
+    def __init__(self, plugin_metadata: PluginMetaData):
         self.plugin_metadata = plugin_metadata
-        self._problems = []
+        self._problems: List[AbstractAnalysisProblem]  = []
     
     @property
     def problems(self):
@@ -29,11 +33,12 @@ class AnalysisReport(object):
         self.problems.append(problem)
 
 
-class FullReport(object):
+class FullReport:
+    analysis_time: Optional[float] = None
+    reports: List[AnalysisReport] = []
     def __init__(self, run_arguments):
         self.run_arguments = run_arguments
-        self.analysis_time = None
-        self.reports = []
 
-    def append_report(self, report):
+
+    def append_report(self, report: AnalysisReport):
         self.reports.append(report)

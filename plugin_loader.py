@@ -1,8 +1,9 @@
 import pkgutil
 import inspect
 import logging
+from typing import TypeVar, List, Type
 
-def load_plugins(plugin_type, directory):
+def load_plugins(plugin_type: Type[object], directory: str) -> List[Type[object]]:
     """Walk the package and get all plugins. 
     """
     logging.debug(f'Searching plugins of type {plugin_type} in {directory}')

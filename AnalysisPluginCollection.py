@@ -3,8 +3,10 @@ from reporting.analysis_results import FullReport
 from plugin_loader import load_plugins
 import time
 import logging
+from typing import List
 
 class AnalysisPluginCollection(object):
+    plugins: List[AbstractAnalysisPlugin] = []
 
     def __init__(self, run_arguments):
         self.run_arguments = run_arguments

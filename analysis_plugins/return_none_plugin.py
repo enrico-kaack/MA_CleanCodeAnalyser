@@ -1,19 +1,20 @@
 from plugin_definition.abstract_analysis_plugin import AbstractAnalysisPlugin
 from reporting.analysis_results import AbstractAnalysisProblem, AnalysisReport
 from plugin_definition.plugin_meta_data import PluginMetaData
+from ast_parser import ParsedSourceFile
+from typing import List
 import ast
+from ast_parser import ParsedSourceFile
 
 
 class ReturnNonePlugin(AbstractAnalysisPlugin):
     def __init__(self):
-        super().__init__()
-
         self.metadata = PluginMetaData(
             name="Return None (Null) Plugin",
             author="Enrico Kaack <e.kaack@live.de>"
         )
 
-    def do_analysis(self, source_files):
+    def do_analysis(self, source_files: List[ParsedSourceFile]) -> AnalysisReport:
         report = AnalysisReport(self.metadata)
 
         for source_file in source_files:
