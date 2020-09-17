@@ -1,6 +1,3 @@
-from typing import List
-
-
 class AbstractAnalysisProblem(object):
 
     def __init__(self):

@@ -1,8 +1,5 @@
-import pkgutil
-import inspect
-import ast
 from plugin_definition.abstract_analysis_plugin import AbstractAnalysisPlugin
-from reporting.analysis_results import FullReport, AnalysisReport
+from reporting.analysis_results import FullReport
 from plugin_loader import load_plugins
 import time
 

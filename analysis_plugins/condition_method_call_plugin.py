@@ -2,7 +2,6 @@ from plugin_definition.abstract_analysis_plugin import AbstractAnalysisPlugin
 from reporting.analysis_results import AbstractAnalysisProblem, AnalysisReport
 from plugin_definition.plugin_meta_data import PluginMetaData
 import ast
-from helper import ast_pretty_print
 
 
 class ConditionMethodCallPlugin(AbstractAnalysisPlugin):

@@ -1,7 +1,6 @@
 import pkgutil
 import inspect
-from plugin_definition.abstract_output_plugin import AbstractOutputPlugin
-from reporting.analysis_results import FullReport
+
 
 def load_plugins(plugin_type, directory):
     """Walk the package and get all plugins. 

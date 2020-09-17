@@ -1,7 +1,4 @@
-import pkgutil
-import inspect
 from plugin_definition.abstract_output_plugin import AbstractOutputPlugin
-from reporting.analysis_results import FullReport
 from plugin_loader import load_plugins
 
 class OutputPluginCollection(object):

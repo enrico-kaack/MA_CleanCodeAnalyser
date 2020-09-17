@@ -1,8 +1,7 @@
 from plugin_definition.abstract_output_plugin import AbstractOutputPlugin
 from plugin_definition.plugin_meta_data import PluginMetaData
-from reporting.analysis_results import FullReport, AnalysisReport
+from reporting.analysis_results import FullReport
 from jinja2 import Template
-from functools import reduce
 
 
 class StdOutputPlugin(AbstractOutputPlugin):
