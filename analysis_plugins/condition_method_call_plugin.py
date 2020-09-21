@@ -52,3 +52,40 @@ class ExplicitComparisonInConditionProblem(AbstractAnalysisProblem):
         self.name = "Explicit comparison in condition"
         self.description = "Explicit comparisons in condition statements should be replaced by method call for better readability."
         super().__init__(file_path, line_number)
+
+
+def test_condition_comparison_found():
+    code = "def f():\n\tif a < b:\n\t\treturn 5"
+    path = "test_path"
+    parsed_ast = ast.parse(code, path)
+    p = ParsedSourceFile(path, parsed_ast, code)
+
+    plugin = ConditionMethodCallPlugin()
+    analysis_report = plugin.do_analysis([p])
+    assert len(analysis_report.problems) == 1
+    assert analysis_report.problems[0].name == "Explicit comparison in condition"
+    assert analysis_report.problems[0].file_path == "test_path"
+    assert analysis_report.problems[0].line_number == 2
+
+def test_condition_comparison_nested_found():
+    code = "def f():\n\tif isSmaller(a,b) or isBigger(a,b) and not a <b:\n\t\treturn 5"
+    path = "test_path"
+    parsed_ast = ast.parse(code, path)
+    p = ParsedSourceFile(path, parsed_ast, code)
+
+    plugin = ConditionMethodCallPlugin()
+    analysis_report = plugin.do_analysis([p])
+    assert len(analysis_report.problems) == 1
+    assert analysis_report.problems[0].name == "Explicit comparison in condition"
+    assert analysis_report.problems[0].file_path == "test_path"
+    assert analysis_report.problems[0].line_number == 2
+
+def test_condition_comparison_not_found():
+    code = "def f():\n\tif isSmaller(a,b):\n\t\treturn 5"
+    path = "test_path"
+    parsed_ast = ast.parse(code, path)
+    p = ParsedSourceFile(path, parsed_ast, code)
+
+    plugin = ConditionMethodCallPlugin()
+    analysis_report = plugin.do_analysis([p])
+    assert len(analysis_report.problems) == 0

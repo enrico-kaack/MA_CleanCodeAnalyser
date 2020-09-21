@@ -35,9 +35,41 @@ class ReturnNonePlugin(AbstractAnalysisPlugin):
 
 
 
-
 class ReturnNullProblem(AbstractAnalysisProblem):
     def __init__(self, file_path, line_number):
         self.name = "Returned None"
-        self.description = "Returning None is dangerous, since the caller has to check for None. Otherwise, a runtime exception may occur."
+        self.description = "Returning None is dangerous since the caller has to check for None. Otherwise, a runtime exception may occur."
         super().__init__(file_path, line_number)
+
+def test_return_none_found():
+    code = "def f():\n\treturn None"
+    path = "test_path"
+    parsed_ast = ast.parse(code, path)
+    p = ParsedSourceFile(path, parsed_ast, code)
+
+    plugin = ReturnNonePlugin()
+    analysis_report = plugin.do_analysis([p])
+    assert len(analysis_report.problems) == 1
+    assert analysis_report.problems[0].name == "Returned None"
+    assert analysis_report.problems[0].file_path == "test_path"
+    assert analysis_report.problems[0].line_number == 2
+
+def test_return_none_not_found():
+    code = "def f():\n\treturn 5"
+    path = "test_path"
+    parsed_ast = ast.parse(code, path)
+    p = ParsedSourceFile(path, parsed_ast, code)
+
+    plugin = ReturnNonePlugin()
+    analysis_report = plugin.do_analysis([p])
+    assert len(analysis_report.problems) == 0
+
+def test_return_none_variation():
+    code = "def f():\n\treturn None if a < b else b"
+    path = "test_path"
+    parsed_ast = ast.parse(code, path)
+    p = ParsedSourceFile(path, parsed_ast, code)
+
+    plugin = ReturnNonePlugin()
+    analysis_report = plugin.do_analysis([p])
+    assert len(analysis_report.problems) == 0
