@@ -39,3 +39,63 @@ class ExplicitComparisonInConditionProblem(AbstractAnalysisProblem):
         self.name = "Explicit comparison in condition simple"
         self.description = "Explicit comparisons in conditions should be replaced by method call for better readability"
         super().__init__(file_path, line_number)
+
+
+def test_condition_comparison_simple_found():
+    code = "def f():\n\tif a < b:\n\t\treturn 5"
+    path = "test_path"
+    parsed_ast = ast.parse(code, path)
+    p = ParsedSourceFile(path, parsed_ast, code)
+
+    plugin = ConditionMethodCallPluginSimple()
+    analysis_report = plugin.do_analysis([p])
+    assert len(analysis_report.problems) == 1
+    assert analysis_report.problems[0].name == "Explicit comparison in condition simple"
+    assert analysis_report.problems[0].file_path == "test_path"
+    assert analysis_report.problems[0].line_number == 2
+
+def test_condition_comparison_simple_is_comparison():
+    code = "def f():\n\tif a is 5:\n\t\treturn 5"
+    path = "test_path"
+    parsed_ast = ast.parse(code, path)
+    p = ParsedSourceFile(path, parsed_ast, code)
+
+    plugin = ConditionMethodCallPluginSimple()
+    analysis_report = plugin.do_analysis([p])
+    assert len(analysis_report.problems) == 1
+    assert analysis_report.problems[0].name == "Explicit comparison in condition simple"
+    assert analysis_report.problems[0].file_path == "test_path"
+    assert analysis_report.problems[0].line_number == 2
+
+def test_condition_comparison_simple_is_not():
+    code = "def f():\n\tif a is not 5:\n\t\treturn 5"
+    path = "test_path"
+    parsed_ast = ast.parse(code, path)
+    p = ParsedSourceFile(path, parsed_ast, code)
+
+    plugin = ConditionMethodCallPluginSimple()
+    analysis_report = plugin.do_analysis([p])
+    assert len(analysis_report.problems) == 1
+    assert analysis_report.problems[0].name == "Explicit comparison in condition simple"
+    assert analysis_report.problems[0].file_path == "test_path"
+    assert analysis_report.problems[0].line_number == 2
+
+def test_condition_comparison_simple_not():
+    code = "def f():\n\tif not a < 5:\n\t\treturn 5"
+    path = "test_path"
+    parsed_ast = ast.parse(code, path)
+    p = ParsedSourceFile(path, parsed_ast, code)
+
+    plugin = ConditionMethodCallPluginSimple()
+    analysis_report = plugin.do_analysis([p])
+    assert len(analysis_report.problems) == 0
+
+def test_condition_comparison_simple_and():
+    code = "def f():\n\tif a < 5 and b < 2:\n\t\treturn 5"
+    path = "test_path"
+    parsed_ast = ast.parse(code, path)
+    p = ParsedSourceFile(path, parsed_ast, code)
+
+    plugin = ConditionMethodCallPluginSimple()
+    analysis_report = plugin.do_analysis([p])
+    assert len(analysis_report.problems) == 0
