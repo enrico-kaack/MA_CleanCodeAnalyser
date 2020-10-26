@@ -4,7 +4,7 @@ from reporting.analysis_results import FullReport
 from jinja2 import Template
 
 
-class StdOutputPlugin(AbstractOutputPlugin):
+class HtmlOutputPlugin(AbstractOutputPlugin):
     def __init__(self):
         super().__init__()
         self.output_format = "html"
