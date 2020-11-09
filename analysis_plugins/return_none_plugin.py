@@ -1,10 +1,9 @@
 from plugin_definition.abstract_analysis_plugin import AbstractAnalysisPlugin
 from reporting.analysis_results import AbstractAnalysisProblem, AnalysisReport
 from plugin_definition.plugin_meta_data import PluginMetaData
-from ast_parser import ParsedSourceFile
+from components.input_component import ParsedSourceFile
 from typing import List
 import ast
-from ast_parser import ParsedSourceFile
 
 
 class ReturnNonePlugin(AbstractAnalysisPlugin):

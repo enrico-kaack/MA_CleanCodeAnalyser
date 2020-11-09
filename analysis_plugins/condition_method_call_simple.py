@@ -3,7 +3,7 @@ from reporting.analysis_results import AbstractAnalysisProblem, AnalysisReport
 from plugin_definition.plugin_meta_data import PluginMetaData
 import ast
 from typing import List
-from ast_parser import ParsedSourceFile
+from components.input_component import ParsedSourceFile
 
 
 class ConditionMethodCallPluginSimple(AbstractAnalysisPlugin):

@@ -1,11 +1,11 @@
 from plugin_definition.abstract_analysis_plugin import AbstractAnalysisPlugin
 from reporting.analysis_results import FullReport
-from plugin_loader import load_plugins
+from helper.plugin_loader import load_plugins
 import time
 import logging
 from typing import List
 
-class AnalysisPluginCollection(object):
+class AnalysisPluginHandler(object):
     plugins: List[AbstractAnalysisPlugin] = []
 
     def __init__(self, run_arguments):

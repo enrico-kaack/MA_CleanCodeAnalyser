@@ -23,7 +23,6 @@ def parse_ast_from_folder(folder):
 
 
 class ParsedSourceFile():
-    
     def __init__(self, file_path, a, content):
         self.file_path = file_path
         self.ast = a
