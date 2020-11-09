@@ -28,10 +28,10 @@ class Arguments:
     @analysis_plugin_directory.setter
     def analysis_plugin_directory(self, value):
         # TODO: check if it is a correct path
-        if os.path.isdir(value):
-            self._analysis_plugin_directory = value
-        else:
-            raise FileNotFoundError("Analysis Plugin Directory is not a directory")
+        #if os.path.isdir(value):
+        self._analysis_plugin_directory = value
+        #else:
+        #    raise FileNotFoundError("Analysis Plugin Directory is not a directory")
 
     @property
     def output_plugin_directory(self):
@@ -40,10 +40,10 @@ class Arguments:
     @output_plugin_directory.setter
     def output_plugin_directory(self, value):
         #TODO: check if it is a correct path
-        if os.path.isdir(value):
-            self._output_plugin_directory = value
-        else:
-            raise FileNotFoundError("Output Plugin Directory is not a directory")
+        #if os.path.isdir(value):
+        self._output_plugin_directory = value
+        #else:
+        #    raise FileNotFoundError("Output Plugin Directory is not a directory")
 
     def __init__(self):
         self._parseInputArguments()
