@@ -1,7 +1,7 @@
-from components.analysis_plugin_handler import AnalysisPluginHandler
-from components.output_plugin_handler import OutputPluginHandler
-from components.input_component import parse_ast_from_folder
-from helper.input_arguments import Arguments
+from ccap.components.analysis_plugin_handler import AnalysisPluginHandler
+from ccap.components.output_plugin_handler import OutputPluginHandler
+from ccap.components.input_component import parse_ast_from_folder
+from ccap.helper.input_arguments import Arguments
 
 class CoreComponent():
     def __init__(self):

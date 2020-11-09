@@ -66,8 +66,8 @@ class Arguments:
 
 
         self.input_directory = args[self.INPUT_DIR][0]
-        self.analysis_plugin_directory = args[self.ANALYSIS_PLUGIN_DIR] if args[self.ANALYSIS_PLUGIN_DIR] is not None else "analysis_plugins"
-        self.output_plugin_directory = args[self.OUTPUT_PLUGIN_DIR] if args[self.OUTPUT_PLUGIN_DIR] is not None else "output_plugins"
+        self.analysis_plugin_directory = args[self.ANALYSIS_PLUGIN_DIR] if args[self.ANALYSIS_PLUGIN_DIR] is not None else "ccap.analysis_plugins"
+        self.output_plugin_directory = args[self.OUTPUT_PLUGIN_DIR] if args[self.OUTPUT_PLUGIN_DIR] is not None else "ccap.output_plugins"
         self.output = args[self.OUTPUT] if args[self.OUTPUT] is not None else "std"
         self.verbose = args[self.VERBOSE] if args[self.VERBOSE] else False
 

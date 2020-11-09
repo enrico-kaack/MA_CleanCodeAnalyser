@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import List, Optional
-from plugin_definition.plugin_meta_data import PluginMetaData
+from ccap.plugin_definition.plugin_meta_data import PluginMetaData
 
 class AbstractAnalysisProblem(ABC):
 

@@ -1,7 +1,7 @@
-from plugin_definition.abstract_analysis_plugin import AbstractAnalysisPlugin
-from reporting.analysis_results import AbstractAnalysisProblem, AnalysisReport
-from plugin_definition.plugin_meta_data import PluginMetaData
-from components.input_component import ParsedSourceFile
+from ccap.plugin_definition.abstract_analysis_plugin import AbstractAnalysisPlugin
+from ccap.reporting.analysis_results import AbstractAnalysisProblem, AnalysisReport
+from ccap.plugin_definition.plugin_meta_data import PluginMetaData
+from ccap.components.input_component import ParsedSourceFile
 from typing import List
 import ast
 

@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
-from reporting.analysis_results import FullReport
-from plugin_definition.plugin_meta_data import PluginMetaData
+from ccap.reporting.analysis_results import FullReport
+from ccap.plugin_definition.plugin_meta_data import PluginMetaData
 from typing import Optional
 
 class AbstractOutputPlugin(ABC):

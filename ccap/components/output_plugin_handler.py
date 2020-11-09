@@ -1,5 +1,5 @@
-from plugin_definition.abstract_output_plugin import AbstractOutputPlugin
-from helper.plugin_loader import load_plugins
+from ccap.plugin_definition.abstract_output_plugin import AbstractOutputPlugin
+from ccap.helper.plugin_loader import load_plugins
 import logging
 from typing import Optional
 

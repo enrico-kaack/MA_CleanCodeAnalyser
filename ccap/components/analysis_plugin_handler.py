@@ -1,6 +1,6 @@
-from plugin_definition.abstract_analysis_plugin import AbstractAnalysisPlugin
-from reporting.analysis_results import FullReport
-from helper.plugin_loader import load_plugins
+from ccap.plugin_definition.abstract_analysis_plugin import AbstractAnalysisPlugin
+from ccap.reporting.analysis_results import FullReport
+from ccap.helper.plugin_loader import load_plugins
 import time
 import logging
 from typing import List

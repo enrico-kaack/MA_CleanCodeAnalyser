@@ -1,6 +1,6 @@
-from plugin_definition.abstract_output_plugin import AbstractOutputPlugin
-from plugin_definition.plugin_meta_data import PluginMetaData
-from reporting.analysis_results import FullReport
+from ccap.plugin_definition.abstract_output_plugin import AbstractOutputPlugin
+from ccap.plugin_definition.plugin_meta_data import PluginMetaData
+from ccap.reporting.analysis_results import FullReport
 
 
 class StdOutputPlugin(AbstractOutputPlugin):

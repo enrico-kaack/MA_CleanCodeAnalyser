@@ -1,9 +1,9 @@
-from plugin_definition.abstract_analysis_plugin import AbstractAnalysisPlugin
-from reporting.analysis_results import AbstractAnalysisProblem, AnalysisReport
-from plugin_definition.plugin_meta_data import PluginMetaData
+from ccap.plugin_definition.abstract_analysis_plugin import AbstractAnalysisPlugin
+from ccap.reporting.analysis_results import AbstractAnalysisProblem, AnalysisReport
+from ccap.plugin_definition.plugin_meta_data import PluginMetaData
 import ast
 from typing import List
-from components.input_component import ParsedSourceFile
+from ccap.components.input_component import ParsedSourceFile
 
 class ConditionMethodCallPlugin(AbstractAnalysisPlugin):
     def __init__(self):
