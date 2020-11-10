@@ -1,6 +1,6 @@
 from ccap.plugin_definition.abstract_analysis_plugin import AbstractAnalysisPlugin
 from ccap.reporting.analysis_results import FullReport
-from ccap.helper.plugin_loader import load_plugins
+from ccap.helper.plugin_loader import load_plugins_with_symlinking
 import time
 import logging
 from typing import List
@@ -13,7 +13,7 @@ class AnalysisPluginHandler(object):
         self.load_plugins()
 
     def load_plugins(self):
-        self.plugins = load_plugins(plugin_type=AbstractAnalysisPlugin, directory=self.run_arguments.analysis_plugin_directory )
+        self.plugins = load_plugins_with_symlinking(plugin_type=AbstractAnalysisPlugin, own_directory="ccap.analysis_plugins", custom_directory=self.run_arguments.analysis_plugin_directory )
 
     def apply_all_plugins_on(self, source_files):
         """Apply all of the plugins on the argument supplied to this function

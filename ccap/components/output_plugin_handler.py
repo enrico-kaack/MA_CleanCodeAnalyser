@@ -1,5 +1,5 @@
 from ccap.plugin_definition.abstract_output_plugin import AbstractOutputPlugin
-from ccap.helper.plugin_loader import load_plugins
+from ccap.helper.plugin_loader import load_plugins_with_symlinking
 import logging
 from typing import Optional
 
@@ -11,7 +11,7 @@ class OutputPluginHandler(object):
         self.load_plugins()
 
     def load_plugins(self):
-        self.plugins = load_plugins(plugin_type=AbstractOutputPlugin, directory=self.run_arguments.output_plugin_directory )
+        self.plugins = load_plugins_with_symlinking(plugin_type=AbstractOutputPlugin, own_directory="ccap.output_plugins", custom_directory=self.run_arguments.output_plugin_directory )
         self. _select_specified_output_plugin()
 
     def _select_specified_output_plugin(self):
