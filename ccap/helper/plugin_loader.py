@@ -2,7 +2,7 @@ import pkgutil
 import inspect
 import logging
 from typing import TypeVar, List, Type
-import importlib
+from importlib.util import find_spec
 import sys
 import os
 
@@ -18,7 +18,7 @@ def _symlink_custom_files(own_directory: str, custom_directory: str):
         return []
 
     symlink_files = []
-    own_plugin_dir_path = os.path.dirname(importlib.util.find_spec(own_directory).origin)
+    own_plugin_dir_path = os.path.dirname(find_spec(own_directory).origin)
 
     for root, dirs, files in os.walk(custom_directory, topdown=False):
         for name in files:
@@ -30,7 +30,7 @@ def _symlink_custom_files(own_directory: str, custom_directory: str):
                 symlink_files.append(symlink_path)
     return symlink_files
 
-def _unlink_files(files: Type[str]):
+def _unlink_files(files: List[str]):
     for f in files:
         logging.debug(f"unlinking {f}")
         os.unlink(f)

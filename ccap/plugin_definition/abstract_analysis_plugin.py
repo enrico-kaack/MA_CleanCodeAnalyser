@@ -6,7 +6,7 @@ from ccap.plugin_definition.plugin_meta_data import PluginMetaData
 
 
 class AbstractAnalysisPlugin(ABC):
-    metadata: Optional[PluginMetaData] = None
+    metadata: PluginMetaData
 
     def __init__(self):
         self.metadata = None
